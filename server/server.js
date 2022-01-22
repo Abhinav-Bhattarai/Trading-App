@@ -8,6 +8,9 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 import cookieParser from 'cookie-parser';
 
+import LoginRoute from './Routes/login.js';
+import SignupRoute from './Routes/register.js';
+
 const app = express();
 const PORT = process.env.PORT || 8080
 const httpsconfig = {
@@ -37,7 +40,7 @@ app.use('/graphql', (req, res) => {
 // REST-Api
 app.use('/login', LoginRoute);
 app.use('/signup', SignupRoute);
-app.use('/checkAuth', checkAuthenticationRoute);
+// app.use('/checkAuth', checkAuthenticationRoute);
 
 // mongoDB;
 mongoose.connect(process.env.URI).then(() => {
@@ -45,6 +48,7 @@ mongoose.connect(process.env.URI).then(() => {
 }).catch(() => {
     console.log('did not connect to mongoDB');
 })
+
 
 server.listen(PORT, () => {
     console.log(`connected to PORT:${PORT}`)    
