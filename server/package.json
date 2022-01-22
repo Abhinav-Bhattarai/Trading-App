@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for trading App",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon server.js"
   },
