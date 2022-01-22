@@ -1,5 +1,7 @@
 import https from 'https';
 import express from 'express';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const { graphqlHTTP } = require('express-graphql');
 import cors from 'cors';
 import mongoose from 'mongoose';
