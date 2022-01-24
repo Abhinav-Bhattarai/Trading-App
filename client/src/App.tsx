@@ -16,7 +16,7 @@ const AsyncMainPage = React.lazy(() => {
 
 function App() {
   const { auth_status, ChangeAuthenticationStatus } = useAuthenticationHook();
-
+  console.log(auth_status);
   return (
     <React.Fragment>
       <LandingPageGuard authStatus={auth_status}>
