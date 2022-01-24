@@ -10,6 +10,9 @@ import cookieParser from 'cookie-parser';
 
 import LoginRoute from './Routes/login.js';
 import SignupRoute from './Routes/register.js';
+import checkAuthenticationRoute from './Routes/authStatus.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080
@@ -35,20 +38,19 @@ app.use('/graphql', (req, res) => {
         graphiql: true,
         context: { cookies }
     })
-})
+});
 
 // REST-Api
 app.use('/login', LoginRoute);
 app.use('/signup', SignupRoute);
-// app.use('/checkAuth', checkAuthenticationRoute);
+app.use('/checkAuth', checkAuthenticationRoute);
 
 // mongoDB;
-mongoose.connect(process.env.URI).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log('connected to mongoDB');
 }).catch(() => {
     console.log('did not connect to mongoDB');
 })
-
 
 server.listen(PORT, () => {
     console.log(`connected to PORT:${PORT}`)    

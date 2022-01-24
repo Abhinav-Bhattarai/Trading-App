@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "author": "Abhinav Bhattarai",
   "license": "MIT",
