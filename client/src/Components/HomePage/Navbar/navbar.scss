@@ -1,3 +1,8 @@
+@mixin logoDimension {
+  width: 25px;
+  height: 25px;
+}
+
 #navbar-container {
   width: 100%;
   padding: 20px 0;
@@ -24,10 +29,37 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    .user-nav-icon {
-      width: 25px;
-      height: 25px;
-      margin-right: 10%;
+
+    #navbar-icon-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 14px 5%;
+      width: 30%;
+      border-radius: 8px;
+      background-color: rgb(244, 244, 244, 0.9);
+      margin-right: 8%;
+      cursor: pointer;
+      transition: background 0.5s;
+
+      &:hover {
+        background-color: rgba(221, 221, 221, 0.9);
+      }
+
+      .dropdown-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      #user-status-name {
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 10%
+      }
+
+      .user-nav-icon {
+        @include logoDimension();
+      }
     }
   }
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { IconContext } 
-from "react-icons";
+import { IconContext } from "react-icons";
 import { BiUser } from "react-icons/bi";
 import { FaReact } from "react-icons/fa";
+import { AiFillCaretDown } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 import Logo from "../../../assets/logo.svg";
@@ -45,10 +45,16 @@ const MidNavigationContainer: React.FC<{}> = ({ children }) => {
 };
 
 const MidNavigator: React.FC<{ name: string }> = ({ name }) => {
-  const new_name = name.replace(/ /g, "")
+  const new_name = name.replace(/ /g, "");
   return (
-    <NavLink to={`${new_name}`} id='navigators' className={({ isActive }) => isActive ? 'navlink-active' : 'navlink-inactive'}>
-      { name }
+    <NavLink
+      to={`${new_name}`}
+      id="navigators"
+      className={({ isActive }) =>
+        isActive ? "navlink-active" : "navlink-inactive"
+      }
+    >
+      {name}
     </NavLink>
   );
 };
@@ -57,7 +63,12 @@ const UserNavigationContainer: React.FC<{}> = ({ children }) => {
   return <nav id="user-navigation-container">{children}</nav>;
 };
 
-const Navbar: React.FC<{}> = () => {
+interface NavbarProps {
+  OpenPopup: (event: React.MouseEvent<HTMLDivElement>) => void;
+  authStatus: boolean | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ authStatus, OpenPopup }) => {
   return (
     <React.Fragment>
       <NavbarContainer>
@@ -70,9 +81,18 @@ const Navbar: React.FC<{}> = () => {
           <MidNavigator name="Support" />
         </MidNavigationContainer>
         <UserNavigationContainer>
-          <IconContainer className="user-nav-icon">
-            <BiUser />
-          </IconContainer>
+          <main id="navbar-icon-container" onClick={OpenPopup}>
+            <IconContainer className="user-nav-icon">
+              <BiUser />
+            </IconContainer>
+            <div id="user-status-name">
+              {" "}
+              {authStatus === false ? "Login" : "new"}{" "}
+            </div>
+            <IconContainer className="dropdown-icon">
+              <AiFillCaretDown />
+            </IconContainer>
+          </main>
         </UserNavigationContainer>
       </NavbarContainer>
     </React.Fragment>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoadingPage from "./Components/UI/loadingPage";
 
 import LandingPageGuard from "./Guards/LandingPageGuard";
 import MainPageGuard from "./Guards/MainPageGuard";
 import useAuthenticationHook from "./Hooks/useAuthenticationHook";
+
+export interface UserInfo {
+  authToken: string;
+  uid: string;
+  UserName: string;
+}
 
 const AsyncLandingPage = React.lazy(() => {
   return import("./Container/landingPage");
@@ -15,8 +21,10 @@ const AsyncMainPage = React.lazy(() => {
 });
 
 function App() {
+
+  const [userInfo, setuserInfo] = useState<null | UserInfo>(null);
   const { auth_status, ChangeAuthenticationStatus } = useAuthenticationHook();
-  console.log(auth_status);
+
   return (
     <React.Fragment>
       <LandingPageGuard authStatus={auth_status}>
@@ -25,7 +33,7 @@ function App() {
             path="/"
             element={
               <React.Suspense fallback={<LoadingPage />}>
-                <AsyncLandingPage />
+                <AsyncLandingPage authStatus={auth_status} />
               </React.Suspense>
             }
           />
@@ -34,7 +42,7 @@ function App() {
             path="*"
             element={
               <React.Suspense fallback={<LoadingPage />}>
-                <AsyncLandingPage />
+                <AsyncLandingPage authStatus={auth_status} />
               </React.Suspense>
             }
           />
@@ -47,7 +55,7 @@ function App() {
             path="/"
             element={
               <React.Suspense fallback={<LoadingPage />}>
-                <AsyncMainPage />
+                <AsyncMainPage userInfo={userInfo} authStatus={auth_status} />
               </React.Suspense>
             }
           />
@@ -56,7 +64,7 @@ function App() {
             path="*"
             element={
               <React.Suspense fallback={<LoadingPage />}>
-                <AsyncMainPage />
+                <AsyncMainPage userInfo={userInfo} authStatus={auth_status} />
               </React.Suspense>
             }
           />
