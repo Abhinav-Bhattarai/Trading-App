@@ -30,15 +30,6 @@ function App() {
       <LandingPageGuard authStatus={auth_status}>
         <Routes>
           <Route
-            path="/"
-            element={
-              <React.Suspense fallback={<LoadingPage />}>
-                <AsyncLandingPage authStatus={auth_status} />
-              </React.Suspense>
-            }
-          />
-
-          <Route
             path="*"
             element={
               <React.Suspense fallback={<LoadingPage />}>
@@ -51,15 +42,6 @@ function App() {
 
       <MainPageGuard authStatus={auth_status}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <React.Suspense fallback={<LoadingPage />}>
-                <AsyncMainPage userInfo={userInfo} authStatus={auth_status} />
-              </React.Suspense>
-            }
-          />
-
           <Route
             path="*"
             element={

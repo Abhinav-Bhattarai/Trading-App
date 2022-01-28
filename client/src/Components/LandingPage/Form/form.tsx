@@ -1,5 +1,5 @@
 import React from "react";
-import './form.scss';
+import "./form.scss";
 
 interface FormContainerProps {
   Submit: (event: React.FormEvent) => void;
@@ -21,32 +21,47 @@ interface FormInputProps {
   ChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   name: string;
-};
+  type: string
+}
 
 export const FormInput: React.FC<FormInputProps> = (props) => {
-  const { value, ChangeValue, placeholder, name } = props
+  const { value, ChangeValue, placeholder, name, type } = props;
 
   return (
     <React.Fragment>
-      <input value={value} name={name} placeholder={placeholder} onChange={ChangeValue}/>
+      <input
+        value={value}
+        name={name}
+        placeholder={placeholder}
+        onChange={ChangeValue}
+        type={type}
+        autoComplete="on"
+      />
     </React.Fragment>
-  )
-}
+  );
+};
 
 interface FormButtonProps {
-  buttonName: string
+  buttonName: string;
 }
 
-export const FormButton: React.FC<FormButtonProps> = ({ buttonName }) => { 
+export const FormButton: React.FC<FormButtonProps> = ({ buttonName }) => {
   return (
-    <button id='form-button' type="submit">{ buttonName }</button>
-  )
-}
+    <button id="form-button" type="submit">
+      {buttonName}
+    </button>
+  );
+};
 
-export const FormLabel: React.FC<{ name: string }> = ({ name }) => {
+export const FormLabel: React.FC<{ name: string; labelName: string }> = ({
+  name,
+  labelName,
+}) => {
   return (
     <React.Fragment>
-      <label htmlFor={name} id='form-label'>{ name }</label>
+      <label htmlFor={name} id="form-label">
+        {labelName}
+      </label>
     </React.Fragment>
-  )
-}
+  );
+};
