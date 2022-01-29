@@ -24,7 +24,7 @@ function App() {
 
   const [userInfo, setuserInfo] = useState<null | UserInfo>(null);
   const { auth_status, ChangeAuthenticationStatus } = useAuthenticationHook();
-
+  
   return (
     <React.Fragment>
       <LandingPageGuard authStatus={auth_status}>

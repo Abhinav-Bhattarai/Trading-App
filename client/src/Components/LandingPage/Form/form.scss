@@ -1,6 +1,54 @@
+@mixin form-btn-mixin {
+  margin: 10px 8%;
+  padding: 16px 0;
+  color: #333;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 35%;
+}
+
 #form-container {
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+
+  #form-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: grey;
+    margin: 10px 8%;
+    margin-top: 16px;
+  }
+
+  #form-input {
+    margin: 0px 8%;
+    border: none;
+    font-weight: 500;
+    padding: 15px 3%;
+    border-radius: 5px;
+    border: 2px solid rgb(197, 197, 197);
+    background-color: #dddddd;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #1889f9;
+    }
+  }
+
+  #form-button {
+    @include form-btn-mixin();
+    margin-top: 20px;
+    background-color: #2265f4;
+    color: #fefefe;
+  }
+}
+
+#oauth-btn {
+  @include form-btn-mixin();
+  margin: 2px 3%;
 }

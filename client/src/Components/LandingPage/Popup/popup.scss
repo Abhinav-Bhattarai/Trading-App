@@ -30,7 +30,7 @@
   width: 30%;
   border-radius: 8px;
   height: 80%;
-  background-color: rgb(218, 218, 218);
+  background-color: rgb(197, 197, 197);
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -40,16 +40,17 @@
   #popup-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 16px 0;
+    padding: 25px 0;
     width: 100%;
     // border-bottom: 2px solid rgb(39, 39, 39);
     // background-color: black;
 
     #popup-header-name {
-      font-weight: 600;
-      font-size: 16px;
-      text-transform: capitalize;
+      font-weight: bolder;
+      color: #333;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-left: 8%;
     }
   }
 }
@@ -57,4 +58,26 @@
 #popup-exiting {
   animation-name: exiting;
   animation-duration: 0.7s;
+}
+
+
+#popup-routers-container {
+  display: flex;
+  margin: 20px 3%;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+
+  #router {
+    font-weight: 600;
+    margin-left: 1%;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #333;
+
+    &:hover {
+      color: #0957ff;
+    }
+  }
 }

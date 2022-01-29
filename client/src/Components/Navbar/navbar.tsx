@@ -5,7 +5,7 @@ import { FaReact } from "react-icons/fa";
 import { AiFillCaretDown } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
-import Logo from "../../../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
 import "./navbar.scss";
 
 const NavbarContainer: React.FC<{}> = ({ children }) => {

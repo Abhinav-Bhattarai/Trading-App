@@ -3,14 +3,22 @@ import { Route, Routes } from "react-router";
 import { Transition } from "react-transition-group";
 // import { Route, Routes } from "react-router-dom";
 import HomePage from "../Components/HomePage/homepage";
-import Navbar from "../Components/HomePage/Navbar/navbar";
+import Navbar from "../Components/Navbar/navbar";
 import {
+  FormButton,
   FormContainer,
   FormInput,
   FormLabel,
+  OAuthButton,
 } from "../Components/LandingPage/Form/form";
-import { Popup, PopupHeader } from "../Components/LandingPage/Popup/popup";
+import {
+  Popup,
+  PopupHeader,
+  PopupRouterContainer,
+} from "../Components/LandingPage/Popup/popup";
 import BlurPage from "../Components/UI/blur";
+import PricesPage from "../Components/PricesPage/prices-page";
+import { axios } from "../axios";
 
 const duration = 700;
 
@@ -34,8 +42,8 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
     }
   };
 
-  const ChangePopupType = (to: "signup" | "login") => {
-    setPopupName(to);
+  const ChangePopupType = () => {
+    popupName === "login" ? setPopupName("signup") : setPopupName("login");
   };
 
   const ChangePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,8 +61,65 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
     setSignupConfirm(value);
   };
 
+  const LengthCheck = () => {
+    if (popupName === "login") {
+      if (login_phone.length > 9 && login_password.length > 7) {
+        return true;
+      }
+      return false;
+    } else {
+      if (
+        signup_password === signup_confirm &&
+        signup_password.length > 7 &&
+        signup_phone.length > 9
+      ) {
+        return true;
+      }
+      return false;
+    }
+  };
+
+  const RegexCheck = () => {
+    let password;
+    popupName === "login"
+      ? (password = login_password)
+      : (password = signup_password);
+    const number_regex = /[0-9]/;
+    if (number_regex.exec(password) !== null) {
+      return true;
+    }
+    return false;
+  };
+
+  const LoginFormSubmit = () => {
+    if (LengthCheck()) {
+      if (RegexCheck()) {
+        let config;
+        config = {
+          PhoneNumber: login_phone,
+          Password: login_password,
+        };
+
+        if (popupName === "signup") {
+          config = {
+            PhoneNumber: signup_phone,
+            Password: signup_password,
+            Confirm: signup_confirm,
+          };
+        }
+        axios.post(`/${popupName}`, config);
+      }
+    }
+  };
+
+  const SignupFormSubmit = () => {};
+
   const SubmitForm = (event: React.FormEvent) => {
     event.preventDefault();
+    if (popupName === "login") {
+      LoginFormSubmit();
+    } else {
+    }
   };
 
   let PopupJSX = null;
@@ -62,7 +127,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
 
   let FormTypeJSX = (
     <React.Fragment>
-      <FormLabel labelName="Phone" name="login_phone" />
+      <FormLabel labelName="Phone Number" name="login_phone" />
       <FormInput
         name="login_phone"
         value={login_phone}
@@ -84,7 +149,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
   if (popupName === "signup") {
     FormTypeJSX = (
       <React.Fragment>
-        <FormLabel labelName="Phone" name="signup_phone" />
+        <FormLabel labelName="Phone Number" name="signup_phone" />
         <FormInput
           name="signup_phone"
           value={signup_phone}
@@ -101,7 +166,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
           type="password"
         />
 
-        <FormLabel labelName="Confirm" name="signup_confirm" />
+        <FormLabel labelName="Confirm Password" name="signup_confirm" />
         <FormInput
           name="signup_confirm"
           value={signup_confirm}
@@ -121,8 +186,15 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
             <Popup className={`popup-${state}`}>
               <PopupHeader name={popupName} ClosePopup={ChangePopupStatus} />
               <FormContainer Submit={SubmitForm}>
-                { FormTypeJSX }
+                {FormTypeJSX}
+                <FormButton buttonName={popupName} />
               </FormContainer>
+              {/* <OAuthButton buttonName={`${popupName} with Google`} />
+              <OAuthButton buttonName={`${popupName} with Facebook`} /> */}
+              <PopupRouterContainer
+                popupName={popupName}
+                ChangePopupType={ChangePopupType}
+              />
             </Popup>
           );
         }}
@@ -138,6 +210,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
       {BlurJSX}
       <Routes>
         <Route path="home" element={<HomePage />} />
+        <Route path="prices" element={<PricesPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </React.Fragment>

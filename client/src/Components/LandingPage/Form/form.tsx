@@ -36,6 +36,7 @@ export const FormInput: React.FC<FormInputProps> = (props) => {
         onChange={ChangeValue}
         type={type}
         autoComplete="on"
+        id='form-input'
       />
     </React.Fragment>
   );
@@ -48,6 +49,14 @@ interface FormButtonProps {
 export const FormButton: React.FC<FormButtonProps> = ({ buttonName }) => {
   return (
     <button id="form-button" type="submit">
+      {buttonName}
+    </button>
+  );
+};
+
+export const OAuthButton: React.FC<FormButtonProps> = ({ buttonName }) => {
+  return (
+    <button id="oauth-btn" type="button">
       {buttonName}
     </button>
   );

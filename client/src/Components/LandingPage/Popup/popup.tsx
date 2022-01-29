@@ -23,18 +23,37 @@ interface PopupHeaderProps {
 
 export const PopupHeader: React.FC<PopupHeaderProps> = (props) => {
   const { name } = props;
+  let new_name = ''
+  name === 'login' ? new_name = 'log in' : new_name = 'sign up'
   return (
     <header id="popup-header">
-      <div id='popup-header-name'> { name } </div>
+      <div id="popup-header-name"> {new_name + ' to your account'} </div>
     </header>
+  );
+};
+
+export const PopupRouterContainer: React.FC<{
+  popupName: "login" | "signup";
+  ChangePopupType: () => void;
+}> = (props) => {
+  const { popupName, ChangePopupType } = props;
+  return (
+    <main id="popup-routers-container">
+      <div>
+        {popupName === "login"
+          ? "Don't have an account ?"
+          : "Already have an account ?"}
+      </div>
+      <div id='router' onClick={ChangePopupType}>
+        {popupName === "login"
+          ? " Create your account"
+          : " Login to your account"}
+      </div>
+    </main>
   );
 };
 
 export const Popup: React.FC<POPUP_INTERFACE> = (props) => {
   const { className, children } = props;
-  return (
-    <PopupContainer className={className}>
-      { children }
-    </PopupContainer>
-  );
+  return <PopupContainer className={className}>{children}</PopupContainer>;
 };
