@@ -9,7 +9,7 @@ import {
   FormContainer,
   FormInput,
   FormLabel,
-  OAuthButton,
+  // OAuthButton,
 } from "../Components/LandingPage/Form/form";
 import {
   Popup,
@@ -94,31 +94,35 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
   const LoginFormSubmit = () => {
     if (LengthCheck()) {
       if (RegexCheck()) {
-        let config;
-        config = {
+        let config = {
           PhoneNumber: login_phone,
           Password: login_password,
         };
-
-        if (popupName === "signup") {
-          config = {
-            PhoneNumber: signup_phone,
-            Password: signup_password,
-            Confirm: signup_confirm,
-          };
-        }
-        axios.post(`/${popupName}`, config);
+        axios.post(`/login`, config);
       }
     }
   };
 
-  const SignupFormSubmit = () => {};
+  const SignupFormSubmit = () => {
+    if (LengthCheck()) {
+      if (RegexCheck()) {
+        let config = {
+          PhoneNumber: signup_phone,
+          Password: signup_password,
+          Confirm: signup_confirm,
+        };
+        axios.post(`/signup`, config);
+        
+      }
+    }
+  };
 
   const SubmitForm = (event: React.FormEvent) => {
     event.preventDefault();
     if (popupName === "login") {
       LoginFormSubmit();
     } else {
+      SignupFormSubmit();
     }
   };
 
