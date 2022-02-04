@@ -1,4 +1,4 @@
-import { UserModel } from "../Models/UserModel";
+import { UserModel } from "../Models/UserModel.js";
 
 export const SignupMiddleware = (req, res, next) => {
   const { PhoneNumber, Password, Confirm } = req.body;
@@ -17,3 +17,4 @@ export const SignupMiddleware = (req, res, next) => {
     return res.json({ error: true });
   }
 };
+

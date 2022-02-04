@@ -35,7 +35,12 @@ router.post("/", SignupMiddleware, async (req, res) => {
       res.cookie("authToken", token, cookie_option);
       res.cookie("uid", config.uid, cookie_option);
       res.cookie("id", config.id, cookie_option);
+      return res.json({ authStatus: true, error: false, id: config.id });
+    } else {
+      return res.json({ authStatus: false, error: true });
     }
+  } else {
+    return res.json({ authStatus: false, error: true });
   }
 });
 

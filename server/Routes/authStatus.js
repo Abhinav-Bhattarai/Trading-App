@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
   try {
     const { authToken, uid, id } = req.cookies;
     const status = CheckJWT(authToken, id, uid);
-    return res.json({ authStatus: status, error: false });
+    return res.json({ authStatus: status, error: false, id });
   } catch {
     return res.json({ authStatus: false, error: false });
   }
