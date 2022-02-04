@@ -1,6 +1,36 @@
+@mixin header {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  // background-color: #e0e0e0;
+}
+
+#header-title {
+  font-weight: bold;
+  margin-left: 2%;
+}
+
 #price-page-container {
   margin-top: 95px;
   width: 100%;
   display: flex;
-  flex-direction: column;
+
+  #market-data-section {
+    flex: 3;
+    margin-left: 2%;
+    #price-page-header {
+      @include header();
+      // background-color: red;
+    }
+  }
+
+  #latest-data-section {
+    flex: 1.5;
+    // background-color: blue;
+    margin-right: 1%;
+
+    #latest-data-header {
+      @include header();
+    }
+  }
 }

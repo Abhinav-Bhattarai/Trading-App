@@ -1,9 +1,8 @@
 import React from "react";
-import { UserInfo } from "../App";
 
 interface PROPS {
   authStatus: boolean | null;
-  userInfo: UserInfo | null;
+  userInfo: string | null;
 }
 
 const MainPage: React.FC<PROPS> = ({ authStatus, userInfo }) => {

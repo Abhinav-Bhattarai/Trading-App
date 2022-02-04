@@ -48,8 +48,17 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
 
   const ChangePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    popupName === "login" ? setLoginPhone(value) : setSignupPhone(value);
+    if (popupName === 'login') {
+      if (login_phone.length <= 10) {
+        setLoginPhone(value);
+      }
+    } else {
+      if (signup_phone.length <= 10) {
+        setSignupPhone(value);
+      }
+    }
   };
+  
 
   const ChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
