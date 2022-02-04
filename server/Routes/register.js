@@ -12,13 +12,15 @@ const GenerateHash = async (Password) => {
 };
 
 router.post("/", SignupMiddleware, async (req, res) => {
-  const { PhoneNumber, Password } = req.body;
+  let { PhoneNumber, Password } = req.body;
   Password = await GenerateHash(Password);
+  console.log(PhoneNumber, Password)
   const data = new UserModel({
     PhoneNumber,
     Password,
   });
   const response = await data.save();
+  console.log(response);
   if (response) {
     const config = {
       uid: response.UID,
