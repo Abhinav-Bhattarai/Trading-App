@@ -1,12 +1,6 @@
 import React from "react";
+import { CryptoDataInterface } from "../PricesPage/prices-page";
 import "./overview-card.scss";
-
-export interface OverViewProps {
-  name: string;
-  lastPrice: string;
-  change: string;
-  markets?: Array<number>;
-}
 
 export const FlexElements: React.FC<{ flex: number; content: string }> = (props) => {
   const { flex, content } = props;
@@ -17,7 +11,13 @@ export const FlexElements: React.FC<{ flex: number; content: string }> = (props)
   );
 };
 
-const OverViewCard: React.FC<{}> = ({ children }) => {
+interface OverViewCardProps {
+  data: CryptoDataInterface
+}
+
+const OverViewCard: React.FC<OverViewCardProps> = (props) => {
+  const { children, data } = props;
+  const { Name, Logo, Close, PreviousClosePrice, Open, Current, Volume } = data;
   return (
     <React.Fragment>
       <main id="overview-card-container">{children}</main>

@@ -36,7 +36,7 @@ export const FormInput: React.FC<FormInputProps> = (props) => {
         onChange={ChangeValue}
         type={type}
         autoComplete="on"
-        id='form-input'
+        className='form-input'
       />
     </React.Fragment>
   );

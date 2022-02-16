@@ -100,19 +100,19 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
     return false;
   };
 
-  const LoginFormSubmit = () => {
+  const LoginFormSubmit = async() => {
     if (LengthCheck()) {
       if (RegexCheck()) {
         let config = {
           PhoneNumber: login_phone,
           Password: login_password,
         };
-        axios.post(`/login`, config);
+        const { data } = await axios.post(`/login`, config);
       }
     }
   };
 
-  const SignupFormSubmit = () => {
+  const SignupFormSubmit = async () => {
     if (LengthCheck()) {
       if (RegexCheck()) {
         let config = {
@@ -120,8 +120,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
           Password: signup_password,
           Confirm: signup_confirm,
         };
-        axios.post(`/signup`, config);
-        
+        const { data } = await axios.post(`/signup`, config);
       }
     }
   };
@@ -135,7 +134,7 @@ const LandingPage: React.FC<{ authStatus: boolean | null }> = ({
     }
   };
 
-  let PopupJSX = null;
+  let PopupJSX = null; 
   let BlurJSX = null;
 
   let FormTypeJSX = (
