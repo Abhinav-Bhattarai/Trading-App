@@ -12,6 +12,7 @@ import LoginRoute from './Routes/login.js';
 import SignupRoute from './Routes/register.js';
 import checkAuthenticationRoute from './Routes/authStatus.js';
 import dotenv from 'dotenv';
+import { MainSchema } from './GraphQL/MainSchema.js';
 dotenv.config();
 
 const app = express();
@@ -31,10 +32,10 @@ app.use(express.json({limit: '50mb'}));
 app.use(cookieParser());
 
 // graphql
-app.use('/graphql', (req, res) => {
+app.use('/graphql', (req, _) => {
     const cookies = req.cookies;
     return graphqlHTTP({
-        schema: '',
+        schema: MainSchema,
         graphiql: true,
         context: { cookies }
     })

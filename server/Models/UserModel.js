@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
+    
     Password: {
         type: String,
         required: true
